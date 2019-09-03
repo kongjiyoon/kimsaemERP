@@ -37,7 +37,6 @@ public class BoardDTO {
 	}
 
 
-
 	public void setFiles(MultipartFile[] files) {
 		this.files = files;
 	}

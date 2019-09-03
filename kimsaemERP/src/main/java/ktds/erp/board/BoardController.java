@@ -47,7 +47,7 @@ public class BoardController {
 				filelist.add(fileName);
 				//업로드 - 서비스단에서 작업
 				uploadservice.upload(files[i], path, fileName);
-				
+			
 			}
 			
 		}
