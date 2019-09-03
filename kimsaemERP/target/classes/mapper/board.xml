@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -43,10 +44,14 @@
 	</select>
 	<insert id="insert" parameterType="board" >
 		insert into board values
-		(board_seq.nextval,'92115kim',#{title},#{content},sysdate,#{category},0)
+		(board_seq.nextval,#{id},#{title},#{content},sysdate,#{category},0)
 	</insert>
 	<insert id="fileinsert" parameterType="Map">
- 		
+ 		insert all
+ 		<foreach collection="filelist" item="file">
+ 			into board_file values(board_seq.currval,#{file})
+ 		</foreach>
+ 		select * from dual
  	</insert>
 </mapper>
 
