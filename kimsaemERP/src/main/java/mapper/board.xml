@@ -43,10 +43,14 @@
 	</select>
 	<insert id="insert" parameterType="board" >
 		insert into board values
-		(board_seq.nextval,'92115kim',#{title},#{content},sysdate,#{category},0)
+		(board_seq.nextval,#{id},#{title},#{content},sysdate,#{category},0)
 	</insert>
 	<insert id="fileinsert" parameterType="Map">
- 		
+ 		insert all
+ 		<foreach collection="filelist" item="file">
+ 			into board_file values(board_seq.currval,#{file})
+ 		</foreach>
+ 		select * from dual
  	</insert>
 </mapper>
 

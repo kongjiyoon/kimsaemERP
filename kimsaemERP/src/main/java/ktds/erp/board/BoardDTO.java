@@ -11,7 +11,7 @@ public class BoardDTO {
 	String content;
 	Date write_date;
 	String category;
-	MultipartFile files;
+	MultipartFile[] files;
 	public BoardDTO(){
 		
 	}
@@ -19,7 +19,7 @@ public class BoardDTO {
 	
 
 	public BoardDTO(String board_no, String id, String title, String content, Date write_date, String category,
-			MultipartFile files) {
+			MultipartFile[] files) {
 		super();
 		this.board_no = board_no;
 		this.id = id;
@@ -32,13 +32,13 @@ public class BoardDTO {
 
 
 
-	public MultipartFile getFiles() {
+	public MultipartFile[] getFiles() {
 		return files;
 	}
 
 
 
-	public void setFiles(MultipartFile files) {
+	public void setFiles(MultipartFile[] files) {
 		this.files = files;
 	}
 
