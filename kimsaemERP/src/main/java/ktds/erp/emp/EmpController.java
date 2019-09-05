@@ -64,7 +64,7 @@ public class EmpController {
 		}
 		return result;
 	}
-	@RequestMapping(value="/emp/login.do",method=RequestMethod.POST)
+	/*@RequestMapping(value="/emp/login.do",method=RequestMethod.POST)
 	public ModelAndView login(MemberDTO loginUser,
 				String member_id_save,HttpServletRequest req) 
 											throws Exception {
@@ -83,14 +83,14 @@ public class EmpController {
 		
 		mav.setViewName(viewName);
 		return mav;
-	}
-	@RequestMapping(value="/emp/logout.do")
+	}*/
+	/*@RequestMapping(value="/emp/logout.do")
 	public String logout(HttpSession ses) throws Exception{
 		if(ses!=null) {
 			ses.invalidate();
 		}
 		return "redirect:/index.do";
-	}
+	}*/
 }
 
 
