@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
 	<!-- 
-		====================================================
-		 스프링 시큐리티가 제공하는 권한과 인증을 사용하며 테스트상태
-		 테스테 상황에서는 spring security가 response하는 로그인페이지가
-		 리다이렉트
-		 
 		 1. 사용자정의 로그인 페이지로 연결
 		 2. 사용자정보를 설정페이지에 명시하지 않고 db에서 확인할 수 있도록
 		 3. 적절한 권한에 대한 처리
-		
 	 -->
-	<!-- 요청path별로 접근할 수 있는 권한을 정의 -->
-	<security:http auto-config="true">				
-		<security:intercept-url pattern="/admin/**" 
-											access="ROLE_ADMIN"/>		
-		<security:intercept-url pattern="/**" access="ROLE_USER"/>
+	<security:http pattern="/**/*.js" security="none"/>
+	<security:http pattern="/**/*.css" security="none"/>
+	<security:http pattern="/images/**" security="none"/>
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/admin/**"
+										access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/index.do" 
+					access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN"/>
+		<security:intercept-url pattern="/emp/login" 
+					access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN"/>
+		<security:intercept-url pattern="/emp/logout.do" 
+					access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN"/>			
+		<security:intercept-url pattern="/**" access="ROLE_USER" />
+		<security:form-login
+			username-parameter="id"
+			password-parameter="pass"
+			login-page="/emp/login"
+			default-target-url="/index.do"
+			authentication-failure-url="/emp/login?fail=true"
+		/>
 	</security:http>
 
 	<!-- 인증을 어떻게 할 것인지 등록 -->
@@ -29,15 +37,11 @@
 		<security:authentication-provider>
 			<security:user-service>
 				<security:user name="user" password="user"
-										authorities="ROLE_USER"/>
-				<security:user name="admin" password="admin" 
-									authorities="ROLE_ADMIN"/>
+					authorities="ROLE_USER" />
+				<security:user name="admin" password="admin"
+					authorities="ROLE_ADMIN" />
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
+
 </beans>
-
-
-
-
-

@@ -19,7 +19,7 @@
 %>
 </head>
 <body>
-	<form name="login_frm" action="/kimsaemERP/emp/login.do" method="post">
+	<form name="login_frm" action="/kimsaemERP/j_spring_security_check" method="post">
 		<table cellpadding="0" cellspacing=5 width="815" bgcolor=#f3f3f3
 			border=0>
 			<tr>

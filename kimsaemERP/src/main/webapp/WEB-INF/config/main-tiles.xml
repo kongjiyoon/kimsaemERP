@@ -36,6 +36,16 @@
 		<put-attribute name="content" 
 		                 value="/WEB-INF/include/content.jsp"/>
 	</definition>
+	
+	<!-- admin페이지 -->
+	<definition name="adminTemplate" 
+			template="/WEB-INF/layout/adminlayout.jsp">
+		<put-attribute name="top" value="/WEB-INF/include/top.jsp"/>
+		<put-attribute name="menu" 
+		                 value="/WEB-INF/include/adminleft.jsp"/>
+		<put-attribute name="content" 
+		                 value="/WEB-INF/include/admincontent.jsp"/>
+	</definition>
 </tiles-definitions>
 
 

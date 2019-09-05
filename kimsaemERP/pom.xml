@@ -34,12 +34,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-		<!-- AspectJ -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj-version}</version>
-		</dependency>
+		
 
 		<!-- Logging -->
 		<dependency>
@@ -183,7 +178,6 @@
 			<artifactId>spring-aspects</artifactId>
 			<version>4.2.4.RELEASE</version>
 		</dependency>
-
 		<!-- spring security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>

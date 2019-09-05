@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- ===================뷰를 위한 컨트롤러 추가====================== -->
-	<view-controller path="/board/insertView.do" 
+	<view-controller path="/board/user/insertView.do" 
 									view-name="board/write"/>
 	<view-controller path="/dept/insertView.do" 
 									view-name="dept/write"/>

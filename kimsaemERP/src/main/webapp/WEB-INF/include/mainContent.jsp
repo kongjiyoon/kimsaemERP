@@ -46,7 +46,7 @@
 						mydata="";//조회한 json객체안의 모든 데이터를 꺼내서 추가할 변수
 						for(i=0;i<data.length;i++){
 							mydata = mydata +
-							"<tr><td class='boardContent' style=''><a href='/kimsaemERP/board/read.do?board_no="+data[i].board_no+"&state=READ'>"
+							"<tr><td class='boardContent' style=''><a href='/kimsaemERP/board/user/read.do?board_no="+data[i].board_no+"&state=READ'>"
 							+data[i].title+
 							"</a></td><td class='boardDate' style=''>"
 							+data[i].write_date+"</td></tr>"
