@@ -93,20 +93,11 @@
 		<beans:property name="maxUploadSize" value="4000000"/>	
 	</beans:bean>
 	<!-- ===========인터셉터를 등록================================= -->
-<<<<<<< HEAD
 	<!-- <interceptors>
 		<interceptor>
-=======
-	<!--<interceptors>
-		 <interceptor>
->>>>>>> refs/remotes/kimsaem/master
 			<mapping path="/**"/>
 			<beans:bean class="advanced.TimeCheckInterceptor"/>
-<<<<<<< HEAD
 		</interceptor>
-=======
-		</interceptor> 
->>>>>>> refs/remotes/kimsaem/master
 		<interceptor>			
 			<mapping path="/emp/**"/>
 			<mapping path="/board/**"/>
@@ -115,7 +106,6 @@
 			<exclude-mapping path="/board/ajax_boardlist.do"/>
 			<beans:bean class="ktds.erp.emp.LoginCheckInterceptor"/>
 		</interceptor>
-<<<<<<< HEAD
 	</interceptors> -->
 	<!-- 1. 트랜잭션처리를 위해 제공하는 클래스를 등록 -->
 	<beans:bean id="transactionManager" 
@@ -135,31 +125,6 @@
 			id="txpointcut"/>
 		<aop:advisor advice-ref="transactionAdvice"
 			pointcut-ref="txpointcut"/>
-=======
-	</interceptors>-->
-	<!-- ========== aop를 이용한 선언적 트랜잭션 처리================ -->
-	<!-- 1. 트랜잭션처리를 위해 제공하는 클래스를 등록 -->
-	<beans:bean id="transactionManager"
-	 class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<beans:property name="dataSource" ref="ds"/>
-	</beans:bean>
-	<!-- 2. DataSourceTransactionManager를 advice로 등록 -->
-	<tx:advice id="transactionAdvice" 
-					transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="insert" rollback-for="Exception"/>
-			
-		</tx:attributes>
-	</tx:advice>
-	
-	<!-- 3. aop처리 -->
-	<aop:config>
-		<aop:pointcut 
-			expression="execution(* ktds.erp.board.BoardServiceImpl.insert(..))" 
-			id="txpointcut"/>
-		<aop:advisor advice-ref="transactionAdvice" 
-		    pointcut-ref="txpointcut"/>	
->>>>>>> refs/remotes/kimsaem/master
 	</aop:config>
 </beans:beans>
 
