@@ -9,8 +9,9 @@
 <body>
 	<div class="list-group"> 
 		<a href="#"	class="list-group-item">사장님말씀</a> 
-		<a href="#" class="list-group-item">경조사</a>
-		<a href="#" class="list-group-item">사내소식</a>
+		<a href="/kimsaemERP/board/list.do?category=경조사" class="list-group-item">경조사</a>
+		<a href="/kimsaemERP/board/list.do?category=사내소식" class="list-group-item">사내소식</a>
+		<a href="/kimsaemERP/admin/notice/list.do" class="list-group-item">공지사항</a>
 		<a href="#"	class="list-group-item">회사일정</a>
 		<a href="/kimsaemERP/board/list.do?category=all"	class="list-group-item">게시판</a>
 	</div>

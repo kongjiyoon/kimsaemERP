@@ -31,7 +31,8 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	@Override
 	public int fileInsert(ArrayList<String> filelist) {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
+		Map<String, Object> paramMap =
+				new HashMap<String, Object>();
 		paramMap.put("filelist",filelist);
 		System.out.println("mybatis:"+paramMap);
 		int sub = 

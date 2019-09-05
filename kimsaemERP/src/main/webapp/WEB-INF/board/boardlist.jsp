@@ -57,7 +57,7 @@
 					<tr>
 						<td>${board.board_no }</td>
 						<td><a
-							href="/kimsaemERP/board/read.do?board_no=${board.board_no}&state=READ">${board.title}</a></td>
+							href="/kimsaemERP/board/user/read.do?board_no=${board.board_no}&state=READ">${board.title}</a></td>
 						<%-- <td><a
 							href="/kimsaemERP/board/${board.category}/${board.board_no }?state=READ">${board.title}</a></td> --%>
 						<td>${board.id}</td>
@@ -75,7 +75,7 @@
 			<option value="write_date">작성일</option>
 		</select> <input type="text" name="search" /> <input type="submit" value="검색">
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="/kimsaemERP/board/insertView.do" style="text-align: right;">글쓰기</a></li>
+			<li><a href="/kimsaemERP/board/user/insertView.do" style="text-align: right;">글쓰기</a></li>
 		</ul>
 	</form>
 

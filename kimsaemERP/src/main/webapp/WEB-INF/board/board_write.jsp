@@ -31,8 +31,13 @@
 
 						<label class="col-sm-2 col-sm-2 control-label">작성자</label>
 						<div class="col-sm-10">
+<<<<<<< HEAD
 							<input type="hidden" name="id" value="${loginUser.id }">
 							<p class="form-control-static">${loginUser.name }</p>
+=======
+							<input type="hidden" name="id" value="${loginUser.id}">
+							<p class="form-control-static">${loginUser.name}</p>
+>>>>>>> refs/remotes/kimsaem/master
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2 col-sm-2 control-label">게시글 유형</label>
