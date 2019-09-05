@@ -10,25 +10,26 @@
 		    (spring securiy 내부의 인증처리로 작업)
 		 2. 정적리소스는 spring security인증을 적용하지 않도록 작업
 	 	 3. 로그아웃을 spring security 내부에서 제공하는 기능으로 처리
+	 	 4. spring EL로 변경
 	 -->
 	<security:http pattern="/**/*.js" security="none"/>
 	<security:http pattern="/**/*.css" security="none"/>
 	<security:http pattern="/images/**" security="none"/>
-	<security:http auto-config="true">
+	<security:http auto-config="true" use-expressions="true">
 		<security:intercept-url pattern="/admin/**"
-										access="ROLE_ADMIN" />
+										access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/index.do" 
-					access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN"/>
+					access="permitAll"/>
 		<security:intercept-url pattern="/emp/login" 
-					access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN"/>
+					access="permitAll"/>
 		<security:intercept-url pattern="/emp/logout.do" 
-					access="ROLE_USER,ROLE_ADMIN"/>	
+					access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>	
 		<security:intercept-url pattern="/**/user/**"
-					access="ROLE_USER,ROLE_ADMIN"/>	
+					access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>	
 		<security:intercept-url pattern="/board/**" 
-			access="ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN"/>
-		<security:intercept-url pattern="/emp/**" access="ROLE_ADMIN"/>	
-		<security:intercept-url pattern="/**" access="ROLE_USER" />
+			access="permitAll"/>
+		<security:intercept-url pattern="/emp/**" access="hasRole('ROLE_ADMIN')"/>	
+		<security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		<security:form-login
 			username-parameter="id"
 			password-parameter="pass"
