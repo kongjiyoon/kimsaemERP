@@ -9,6 +9,12 @@
 		where m.deptno = d.deptno and d.job_category = j.job_id 
 				and id=#{id} and pass=#{pass}
 	</select>
+	<select id="securityLogin" resultType="login" parameterType="String">
+		select m.*,d.deptname,j.job_category,j.menupath 
+		from member m, dept d, job j 
+		where m.deptno = d.deptno and d.job_category = j.job_id 
+				and id=#{id}
+	</select>
 	<select id="idcheck" resultType="emp" parameterType="String" >
 		select * from member where id=#{id}
 	</select>

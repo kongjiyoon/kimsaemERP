@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+	<!-- 
+		 1. 암호화되어 DB에 저장된 pass와 비교하여 인증하는 작업처리
+		 	AuthenticationManager와 AuthenticationProvider를 커스트마이징
+	 -->
+	<security:http pattern="/**/*.js" security="none"/>
+	<security:http pattern="/**/*.css" security="none"/>
+	<security:http pattern="/images/**" security="none"/>
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/admin/**"
+										access="hasRole('admin')" />
+		<security:intercept-url pattern="/index.do" 
+					access="permitAll"/>
+		<security:intercept-url pattern="/emp/login" 
+					access="permitAll"/>
+		<security:intercept-url pattern="/emp/logout.do" 
+					access="hasAnyRole('admin','user')"/>	
+		<security:intercept-url pattern="/**/user/**"
+					access="hasAnyRole('admin','user')"/>	
+		<security:intercept-url pattern="/board/**" 
+			access="permitAll"/>
+		<security:intercept-url pattern="/emp/**" access="hasRole('admin')"/>	
+		<security:intercept-url pattern="/**" access="hasRole('user')" />
+		<security:form-login
+			username-parameter="id"
+			password-parameter="pass"
+			login-page="/emp/login"
+			default-target-url="/index.do"
+			authentication-failure-url="/emp/login?fail=true"
+		/>
+		<security:logout
+			logout-url="/emp/logout.do"
+			logout-success-url="/emp/login"
+			delete-cookies="true"
+			invalidate-session="true"
+		/>
+	</security:http>
+
+	<!-- 인증을 어떻게 할 것인지 등록 -->
+	<security:authentication-manager>
+		<security:authentication-provider ref="customProvider">
+		</security:authentication-provider>
+	</security:authentication-manager>
+	<bean id= "customProvider" 
+	class="ktds.erp.emp.authentication.CustomAuthenticationProvider"/>
+	<import resource="spring-config.xml"/>
+</beans>

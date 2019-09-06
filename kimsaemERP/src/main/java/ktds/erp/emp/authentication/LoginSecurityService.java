@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import ktds.erp.emp.EmpDAO;
-import ktds.erp.emp.MemberDTO;
-
+import ktds.erp.emp.LoginDTO;
+@Service
 //로그인 인증 작업을 처리하는 서비스 클래스 - Spring security의 클래스
 public class LoginSecurityService implements UserDetailsService{
 
@@ -28,8 +28,8 @@ public class LoginSecurityService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) 
 							throws UsernameNotFoundException {
 		System.out.println("loadUserByUsername===>"+username);
-		MemberDTO loginUser = dao.findbyId(username);
-		System.out.println(loginUser);
+		LoginDTO user = dao.findbyId(username);
+		System.out.println(user);
 		
 		//db에서 조회한 MemberDTO를 UserDetails타입으로 변환해서 리턴
 		//===> 변환해서 리턴하지 않고 UserDetails을 상속하는 DTO를
@@ -59,9 +59,16 @@ public class LoginSecurityService implements UserDetailsService{
 		System.out.println("권한리스트=>"+authorities);
 		/*authorities.add(
 				new SimpleGrantedAuthority(loginUser.getAuthority()));*/
-		securityLoginUser = 
+		/*securityLoginUser = 
 				new User(loginUser.getId(), loginUser.getPass(),
-						authorities);
+						authorities);*/
+		securityLoginUser = new SecurityLoginDTO(authorities,user.getId(),user.getPass(),
+				user.getName(),user.getSsn(),user.getBirthday(),user.getMarry(),
+				user.getGender(),user.getPosition(),user.getDuty(),user.getClasses(),
+				user.getStartday(),user.getEndday(),user.getDeptno(),user.getCurstate(),
+				user.getZipcode(),user.getAddr(),user.getDetailaddr(),user.getPhonehome(),
+				user.getPhoneco(),user.getPhonecell(),user.getEmail(),user.getProfile_photo(),
+				user.getDeptname(),user.getJob_category(),user.getMenupath());
 		System.out.println("======================end=================");
 		return securityLoginUser;
 	}

@@ -1,5 +1,6 @@
 package ktds.kimsaem.erp;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,8 @@ public class IndexController{
 	@Autowired
 	BoardService service;
 	@RequestMapping("/index.do")
-	public ModelAndView main(){
+	public ModelAndView main(Principal principal){
+		System.out.println("인증된사용자===>"+principal);
 		ModelAndView mav = new ModelAndView();
 		List<BoardDTO> boardlist=  service.boardList("게시판");
 		mav.addObject("boardlist", boardlist);

@@ -32,9 +32,13 @@ public class AdminDAOImpl implements AdminDAO {
 		//userlist의 갯수만큼 sqlSession의 update메소드를 호출
 		int size = userlist.size();
 		int result = 0;
-		for (int i = 0; i < size; i++) {
+		/*for (int i = 0; i < size; i++) {
 			result = sqlSession.update("ktds.erp.emp.passchange", userlist.get(i));
+		}*/
+		for (MemberDTO user : userlist) {
+			result = sqlSession.update("ktds.erp.emp.passchange", user);
 		}
+		result = 1;
 		return result;
 	}
 

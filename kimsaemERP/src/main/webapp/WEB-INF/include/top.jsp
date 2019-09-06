@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,25 +36,31 @@
 				style="position: absolute; top: 30px; font-size: 18pt; font-weight: bolder; text-decoration: none; padding-left: 10px">KimSaemERP</a>
 			<ul class="nav navbar-nav navbar-right"
 				style="position: relative; top: 20px">
-				<li style="margin-right: 20px; height: 70px"><a
-					href="/kimsaemERP/emp/login"><span
-						class="glyphicon glyphicon-log-in"> </span>Login</a></li>
-				<li><a href="/kimsaemERP/admin/index.do"> <span
+				
+				
+				<se:authorize access="isAnonymous()">
+					<li style="margin-right: 20px; height: 70px"><a
+						href="/kimsaemERP/emp/login"><span
+							class="glyphicon glyphicon-log-in"> 
+							</span>Login</a></li>
+					</ul>
+				</se:authorize>
+				<se:authorize access="hasAnyRole('admin','systemadmin')">
+					<li><a href="/kimsaemERP/admin/index.do"> <span
 						class="glyphicon glyphicon-user"></span>관리자
-				</a></li>
-
-
-
-
-				<li><a href="/kimsaemERP/emp/logout.do"><span
-						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-			</ul>
-
-			<span class="navbar-form pull-right"> <img class="img-circle"
-				style="width: 60px; height: 70px"
-				src="/kimsaemERP/images/${loginUser.profile_photo }" />
-			</span>
-
+					</a></li>
+				</se:authorize>
+				<se:authorize access="isAuthenticated()">
+					<li><a href="/kimsaemERP/emp/logout.do"><span
+							class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+					</ul>
+				
+				
+					<span class="navbar-form pull-right"> <img class="img-circle"
+						style="width: 60px; height: 70px"
+						src="/kimsaemERP/images/<se:authentication property='principal.profile_photo'/>" />
+					</span>
+				</se:authorize>
 
 			<form class="navbar-form pull-right"
 				style="position: relative; top: 20px">
