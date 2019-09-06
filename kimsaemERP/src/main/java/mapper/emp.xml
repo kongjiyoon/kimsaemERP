@@ -17,6 +17,31 @@
 		#{gender},null,null,null,sysdate,null,#{deptno},null,#{zipcode},#{addr},#{detailaddr},
 		#{phonehome},#{phoneco},#{phonecell},#{email},#{profile_photo})
 	</insert>
+	<select id="authoritylist" parameterType="String" resultType="authority">
+		select m.id,a.authorityname 
+		from member m, dept d, job g, groupauthority ga, authority a
+		where m.deptno = d.deptno
+      		and d.job_category = g.job_id
+      		and ga.groupid = g.job_id
+      		and a.authorityid = ga.authorityid
+      		and m.id=#{id}
+	</select>
+	<select id="selectAll" resultType="emp">
+		select * from member
+	</select>
+	<!-- check된 아이디의 모든 정보를 ArrayList<MemberDTO>의 형태로 리턴받을 수 있도록 
+	   select문을 등록하세요 -->
+	<select id="chkidselect" parameterType="Map" resultType="emp">
+		select * from member where id in (
+		<foreach collection="list" item="id" separator=",">
+ 			#{id}
+ 		</foreach>
+ 		)
+	</select>
+	<!-- password를 변경할 수 있도록 update문을 정의하세요 -->
+	<update id="passchange" parameterType="emp">
+		update member set pass = #{pass} where id = #{id}
+	</update>
 </mapper>
 
 

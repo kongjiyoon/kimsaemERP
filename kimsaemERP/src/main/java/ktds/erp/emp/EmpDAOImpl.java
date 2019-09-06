@@ -65,4 +65,10 @@ public class EmpDAOImpl implements EmpDAO {
 		return result;
 	}
 
+	@Override
+	public MemberDTO findbyId(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ktds.erp.emp.idcheck",id);
+	}
+
 }

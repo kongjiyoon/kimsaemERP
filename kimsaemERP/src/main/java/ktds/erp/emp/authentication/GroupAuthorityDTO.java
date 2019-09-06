@@ -1,12 +1,12 @@
 package ktds.erp.emp.authentication;
 
-public class GroupAuthroityDTO {
+public class GroupAuthorityDTO {
 	private String groupid;
 	private String authorityname;
-	public GroupAuthroityDTO() {
+	public GroupAuthorityDTO() {
 		
 	}
-	public GroupAuthroityDTO(String groupid, String authorityname) {
+	public GroupAuthorityDTO(String groupid, String authorityname) {
 		super();
 		this.groupid = groupid;
 		this.authorityname = authorityname;

@@ -30,3 +30,19 @@ insert into groupauthority values('j005','auth05');
 
 
 select * from member;
+
+select m.id, a.authorityname
+from member m, dept d, job g, authority a, groupauthority ga
+where m.deptno = d.deptno
+	and d.job_category = g.job_id
+	and g.job_id = ga.groupid
+	and a.authorityid = ga.authorityid
+	and m.id = '92115kim';
+
+
+
+
+
+
+
+

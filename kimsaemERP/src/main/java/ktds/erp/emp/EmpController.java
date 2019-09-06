@@ -64,11 +64,7 @@ public class EmpController {
 		}
 		return result;
 	}
-<<<<<<< HEAD
 	/*@RequestMapping(value="/emp/login.do",method=RequestMethod.POST)
-=======
-/*	@RequestMapping(value="/emp/login.do",method=RequestMethod.POST)
->>>>>>> refs/remotes/kimsaem/master
 	public ModelAndView login(MemberDTO loginUser,
 				String member_id_save,HttpServletRequest req) 
 											throws Exception {
@@ -88,11 +84,7 @@ public class EmpController {
 		mav.setViewName(viewName);
 		return mav;
 	}*/
-<<<<<<< HEAD
 	/*@RequestMapping(value="/emp/logout.do")
-=======
-/*	@RequestMapping(value="/emp/logout.do")
->>>>>>> refs/remotes/kimsaem/master
 	public String logout(HttpSession ses) throws Exception{
 		if(ses!=null) {
 			ses.invalidate();

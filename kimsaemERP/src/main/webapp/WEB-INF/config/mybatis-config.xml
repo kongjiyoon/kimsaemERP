@@ -8,6 +8,8 @@
 		<typeAlias type="ktds.erp.emp.MemberDTO" alias="emp"/>
 		<typeAlias type="ktds.erp.dept.DeptDTO" alias="dept"/>
 		<typeAlias type="ktds.erp.emp.LoginDTO" alias="login"/>
+		<typeAlias type="ktds.erp.emp.authentication.MemberAuthoritysDTO" 
+						alias="authority"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/board.xml"/>

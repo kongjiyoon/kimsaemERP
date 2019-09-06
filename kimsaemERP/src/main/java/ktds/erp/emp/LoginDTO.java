@@ -9,7 +9,7 @@ public class LoginDTO extends MemberDTO{
 	public LoginDTO(){
 		
 	}
-	public LoginDTO(String id, String pass, String name, String ssn, Date birthday, String marry, String gender,
+	public LoginDTO(String id, String pass, String name, String ssn, String birthday, String marry, String gender,
 			String position, String duty, String classes, Date startday, Date endday, String deptno, String curstate,
 			String zipcode, String addr, String detailaddr, String phonehome, String phoneco, String phonecell,
 			String email, String profile_photo,

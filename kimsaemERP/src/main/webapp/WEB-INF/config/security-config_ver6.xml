@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+	<!-- 
+		 1. 사용자정의 로그인 페이지로 접속하도록 설정
+		    (spring securiy 내부의 인증처리로 작업)
+		 2. 정적리소스는 spring security인증을 적용하지 않도록 작업
+	 	 3. 로그아웃을 spring security 내부에서 제공하는 기능으로 처리
+	 	 4. spring EL로 변경
+	 	 5. 로그인하면 DB에 저장된 사용자와 정보 비교하기
+	 	    : DB에서 조회한 데이터로 연결하기
+	 	 6. 디비에 등록된 권한리스트를 가져와서 액세스권한 제어하기
+	 -->
+	<security:http pattern="/**/*.js" security="none"/>
+	<security:http pattern="/**/*.css" security="none"/>
+	<security:http pattern="/images/**" security="none"/>
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/admin/**"
+										access="hasRole('admin')" />
+		<security:intercept-url pattern="/index.do" 
+					access="permitAll"/>
+		<security:intercept-url pattern="/emp/login" 
+					access="permitAll"/>
+		<security:intercept-url pattern="/emp/logout.do" 
+					access="hasAnyRole('admin','user')"/>	
+		<security:intercept-url pattern="/**/user/**"
+					access="hasAnyRole('admin','user')"/>	
+		<security:intercept-url pattern="/board/**" 
+			access="permitAll"/>
+		<security:intercept-url pattern="/emp/**" access="hasRole('admin')"/>	
+		<security:intercept-url pattern="/**" access="hasRole('user')" />
+		<security:form-login
+			username-parameter="id"
+			password-parameter="pass"
+			login-page="/emp/login"
+			default-target-url="/index.do"
+			authentication-failure-url="/emp/login?fail=true"
+		/>
+		<security:logout
+			logout-url="/emp/logout.do"
+			logout-success-url="/emp/login"
+			delete-cookies="true"
+			invalidate-session="true"
+		/>
+	</security:http>
+
+	<!-- 인증을 어떻게 할 것인지 등록 -->
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="loginService">
+		</security:authentication-provider>
+	</security:authentication-manager>
+	<bean id ="loginService"
+		class="ktds.erp.emp.authentication.LoginSecurityService"/>
+	<import resource="spring-config.xml"/>
+</beans>
