@@ -3,10 +3,8 @@ package ktds.kimsaem.erp;
 import java.security.Principal;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ktds.erp.board.BoardDTO;
 import ktds.erp.board.BoardService;
-import ktds.erp.emp.LoginDTO;
+import ktds.erp.emp.authentication.SecurityLoginDTO;
 
 @Controller
 public class IndexController{
@@ -45,18 +43,11 @@ public class IndexController{
 		return "login";
 	}
 	@RequestMapping(value="/menu/job.do",method=RequestMethod.GET)
-	public String showjobMenu(HttpServletRequest req) throws Exception{
-		String viewName = "";
-		HttpSession ses = req.getSession(false);
-		if(ses!=null) {
-			System.out.println("기존 사용하던 세션");	
-			LoginDTO user = (LoginDTO)ses.getAttribute("loginUser");
-			if(user!=null) {
-				System.out.println("로그인하고 작업중");	
-				viewName = user.getMenupath();
-			}
-		}
-		
+	public String showjobMenu(Principal principal) throws Exception{
+		String viewName="";
+		SecurityLoginDTO loginUser = 
+				(SecurityLoginDTO)((UsernamePasswordAuthenticationToken)principal).getPrincipal();
+		viewName = loginUser.getMenupath();
 		return viewName;
 	}
 	@RequestMapping("/admin/index.do")

@@ -53,6 +53,9 @@
 		<security:authentication-provider user-service-ref="loginService">
 		</security:authentication-provider>
 	</security:authentication-manager>
+	<bean id="passEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+		<constructor-arg name="strength" value="256"/>
+	</bean>
 	<bean id ="loginService"
 		class="ktds.erp.emp.authentication.LoginSecurityService"/>
 	<import resource="spring-config.xml"/>

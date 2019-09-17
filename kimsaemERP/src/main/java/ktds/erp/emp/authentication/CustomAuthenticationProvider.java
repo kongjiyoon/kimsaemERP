@@ -12,8 +12,8 @@ public class CustomAuthenticationProvider implements
 						AuthenticationProvider{
 	@Autowired
 	UserDetailsService securityService;
-	ShaPasswordEncoder ShaPasswordEncoder = 
-			new ShaPasswordEncoder(256);
+	@Autowired
+	ShaPasswordEncoder ShaPasswordEncoder;
 	@Override
 	public Authentication authenticate(Authentication data) throws AuthenticationException {
 		System.out.println("CustomAuthenticationProvider===>"+data);
@@ -33,7 +33,7 @@ public class CustomAuthenticationProvider implements
 		//db에서 조회한 데이터와 입력한 데이터를 비교
 		boolean state = 
 				ShaPasswordEncoder.isPasswordValid(loginUser.getPass(),
-				pass, null);
+				pass, loginUser.getId());
 		System.out.println("패스워드비교=>"+state);
 		//인증결과를 리턴 - UsernamePasswordAuthenticationToken으로 리턴
 		//principal은 인증된 사용자정보

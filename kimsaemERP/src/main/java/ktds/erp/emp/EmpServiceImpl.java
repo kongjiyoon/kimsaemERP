@@ -14,7 +14,8 @@ public class EmpServiceImpl implements EmpService {
 	EmpDAO dao;
 	@Autowired
 	FileUploadLogic upload;
-	ShaPasswordEncoder shaPasswordEncoder = new ShaPasswordEncoder(256);
+	@Autowired
+	ShaPasswordEncoder shaPasswordEncoder;
 	@Override
 	public ArrayList<MemberDTO> getTreeEmpList(String deptno) {
 		// TODO Auto-generated method stub
@@ -24,7 +25,7 @@ public class EmpServiceImpl implements EmpService {
 	@Override
 	public int insert(MemberDTO user,MultipartFile file,String realpath,String filename) {
 		
-		String securityPass = shaPasswordEncoder.encodePassword(user.getPass(), null);
+		String securityPass = shaPasswordEncoder.encodePassword(user.getPass(), user.getId());
 		System.out.println(securityPass);
 		user.setPass(securityPass);
 		upload.upload(file, realpath, filename);
